@@ -91,8 +91,10 @@ class Controller(object):
                                   gamma=gamma, coef0=coef0, degree=degree)
             clf.fit(X)
         else:
+            # clf = svm.SVC(kernel=kernel_map[self.kernel.get()], C=C,
+            #               gamma=gamma, coef0=coef0, degree=degree)
             clf = svm.SVC(kernel=kernel_map[self.kernel.get()], C=C,
-                          gamma=gamma, coef0=coef0, degree=degree)
+                          gamma=gamma, coef0=coef0, degree=degree, class_weight='balanced')
             clf.fit(X, y)
         if hasattr(clf, 'score'):
             print "Accuracy:", clf.score(X, y) * 100
